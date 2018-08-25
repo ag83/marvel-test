@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import router from './router';
 
-import './App.css';
+import './App.pcss';
 
 export default class App extends Component {
   render() {

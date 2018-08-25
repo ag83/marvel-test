@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import { Button, Table } from 'semantic-ui-react';
 
-import { getUsersSaga } from '../../actions';
+import { getHero } from './actions';
 
 //import styles from './styles';
 
-class RegisterPage extends Component {
+class HeroPage extends Component {
   render() {
     return (
       <div>
-        register
+        Hero
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  users: state.usersReducer.users
+  hero: state.hero
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUsersSaga: () =>
-    dispatch(getUsersSaga())
+  getHero: () =>
+    dispatch(getHero())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+export default connect(mapStateToProps, mapDispatchToProps)(HeroPage);

@@ -3,10 +3,10 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
 import { history } from './store';
-import HeroesPage from './components/Heroes';
-import HeroPage from './components/Hero';
-import LoginPage from './components/Login';
-import RegisterPage from './components/Register';
+import HeroesPage from './screen/Heroes/HeroesPage';
+import HeroPage from './screen/Hero/HeroPage';
+import LoginPage from './screen/Login/LoginPage';
+import RegisterPage from './screen/Register/RegisterPage';
 
 export const LOGIN = '/login';
 export const REGISTER = '/register';

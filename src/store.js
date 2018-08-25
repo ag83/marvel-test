@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
-import sagas from './sagas';
+import IndexSaga from './sagas';
 
 export const history = createHistory();
 
@@ -37,6 +37,6 @@ const store = createStore(
   composedEnhancers
 );
 
-sagaMiddleware.run(sagas);
+sagaMiddleware.run(IndexSaga);
 
 export default store;

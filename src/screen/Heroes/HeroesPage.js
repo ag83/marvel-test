@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { Button, Table } from 'semantic-ui-react';
 
-import { getUsersSaga } from '../../actions';
+import heroesRequest from './actions';
 
-//import styles from './styles';
 
 class HeroesPage extends Component {
   render() {
@@ -17,12 +15,12 @@ class HeroesPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.usersReducer.users
+  heroes: state.heroes
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUsersSaga: () =>
-    dispatch(getUsersSaga())
+  getHeroes: () =>
+    dispatch(heroesRequest())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroesPage);
