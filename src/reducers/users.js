@@ -13,3 +13,4 @@ export default function setBrowserInfo(state = initialState, action) {
       return state;
   }
 }
+
