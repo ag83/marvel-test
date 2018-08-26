@@ -1,9 +1,14 @@
-import { LOGIN_REQUESTING } from './reducer';
+import { LOGIN_REQUESTING, LOGOUT_REQUESTING } from './reducer';
 
-export default function loginRequest({ email, password }) {
+export function loginRequest({ email, password }) {
   return {
     type: LOGIN_REQUESTING,
-    email,
-    password,
+    payload: { email, password }
+  };
+}
+
+export function logoutRequest() {
+  return {
+    type: LOGOUT_REQUESTING
   };
 }

@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
-
-import store from './store';
 import router from './router';
+import Loading from './screen/Common/components/Loading';
+import Alert from './screen/Common/components/Alert';
 
 import './App.pcss';
 
-export default class App extends Component {
+class AppContainer extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <div>
         {router()}
-      </Provider>
+        <Loading loading={this.props.loading} />
+        <Alert messages={this.props.messages} />
+      </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    loading: state.common.loading,
+    messages: state.common.messages,
+  };
+}
+
+export default connect(mapStateToProps)(AppContainer);

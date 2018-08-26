@@ -1,60 +1,69 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import reduxForm from 'redux-form/es/reduxForm';
+import Field from 'redux-form/es/Field';
+
+import inputWithValidation from '../../Common/components/inputWithValidation';
 
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      username: '',
-      email: '',
-      passwordOne: '',
-      passwordTwo: '',
-      error: null
-    };
+    this.registerUser = this.registerUser.bind(this);
+  }
+
+  registerUser(values) {
+    this.props.registerUser({
+      email: values.Email,
+      password: values.PasswordOne
+    });
   }
 
   render() {
-    const {
-      username,
-      email,
-      passwordOne,
-      passwordTwo,
-      error,
-    } = this.state;
-
-
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={username}
-          onChange={event => this.setState({ username: event.target.value })}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          value={email}
-          onChange={event => this.setState({ email: event.target.value })}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={passwordOne}
-          onChange={event => this.setState({ passwordOne: event.target.value })}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          value={passwordTwo}
-          onChange={event => this.setState({ passwordTwo: event.target.value })}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button type="submit">
+      <form onSubmit={this.props.handleSubmit(this.registerUser)} autoComplete="off" className="mv-register__container">
+        <h2 className="mv-register__header">REGISTER</h2>
+        <div className="mv-register__input-group">
+          <label htmlFor="Email" className="mv-register__label">
+            Email
+          </label>
+          <Field
+            component={inputWithValidation}
+            className="mv-register__form-input"
+            placeholder="Email"
+            name="Email"
+            type="text"
+            wrapperClass="mv-register__form-input-wrapper"
+          />
+        </div>
+        <div className="mv-register__input-group">
+          <label htmlFor="PasswordOne" className="mv-register__label">
+            Password
+          </label>
+          <Field
+            component={inputWithValidation}
+            className="mv-register__form-input"
+            placeholder="Password"
+            name="PasswordOne"
+            type="password"
+            wrapperClass="mv-register__form-input-wrapper"
+          />
+        </div>
+        <div className="mv-register__input-group">
+          <label htmlFor="PasswordTwo" className="mv-register__label">
+            Confirm Password
+          </label>
+          <Field
+            component={inputWithValidation}
+            className="mv-register__form-input"
+            placeholder="Confirm Password"
+            name="PasswordTwo"
+            type="password"
+            wrapperClass="mv-register__form-input-wrapper"
+          />
+        </div>
+        <button type="submit" className="mv-register__form-submit" disabled={this.props.invalid || this.props.submitting || this.props.pristine} >
           Register
         </button>
-
-        { error && <p>{error.message}</p> }
       </form>
     );
   }
@@ -63,30 +72,27 @@ class RegisterForm extends Component {
 function validate(formProps) {
   const errors = {};
 
-  if (!formProps.UserName) {
-    errors.UserName = 'Please enter a user name';
-  }
-
   if (!formProps.PasswordOne) {
-    errors.Password = 'Please enter a password';
-  } else if (formProps.Password.length < 6) {
+    errors.PasswordOne = 'Please enter a password';
+  } else if (formProps.PasswordOne.length < 6) {
     errors.PasswordOne = 'Password length must be at least 6 characters in length';
   }
 
   if (!formProps.PasswordTwo) {
     errors.PasswordTwo = 'Please repeat a password';
+  } else if (formProps.PasswordTwo.length < 6) {
+    errors.PasswordOne = 'Password length must be at least 6 characters in length';
   }
 
   if (formProps.PasswordOne && formProps.PasswordTwo && formProps.PasswordOne !== formProps.PasswordTwo) {
     errors.PasswordTwo = 'Passwords must be the same';
   }
 
-  if (!formProps.Mail) {
-    errors.Mail = 'Please enter a email';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.Mail)) {
-    errors.Mail = 'Invalid email address';
+  if (!formProps.Email) {
+    errors.Email = 'Please enter a email';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.Email)) {
+    errors.Email = 'Invalid email address';
   }
-
   return errors;
 }
 

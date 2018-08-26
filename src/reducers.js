@@ -6,6 +6,7 @@ import heroes from './screen/Heroes/reducer';
 import login from './screen/Login/reducer';
 import register from './screen/Register/reducer';
 import user from './screen/User/reducer';
+import common from './screen/Common/reducer';
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   heroes,
   login,
   register,
-  user
+  user,
+  common
 });

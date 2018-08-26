@@ -1,49 +1,49 @@
-import { take, fork, cancel, call, put, cancelled } from 'redux-saga/effects';
+import { takeEvery, call, put } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 
-import { LOGIN_REQUESTING, LOGIN_SUCCESS, LOGIN_ERROR } from './reducer';
-import { doSignInWithEmailAndPassword } from '../../firebase/auth';
+import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './reducer';
+import { SET_LOADING } from '../Common/reducer';
+import showMessage from '../Common/sagas';
+import { doSignInWithEmailAndPassword, doSignOut } from '../../firebase/auth';
 import { setUser, unsetUser } from '../User/actions';
-import { USER_UNSET } from '../User/reducer';
 import { LOGIN, HOME } from '../../router';
 
-function* logout() {
-  yield put(unsetUser());
-  localStorage.removeItem('user');
-  yield put(replace(LOGIN));
+function* logoutFlow() {
+  try {
+    yield put({ type: SET_LOADING, payload: true });
+    yield call(doSignOut);
+    yield put(unsetUser());
+    yield put({ type: LOGOUT_SUCCESS });
+    yield put(replace(LOGIN));
+  } catch (error) {
+    yield call(showMessage, { type: 'error', text: error.message });
+  } finally {
+    yield put({ type: SET_LOADING, payload: false });
+  }
 }
 
-function* loginFlow(email, password) {
+function* loginFlow(action) {
   let user;
   try {
+    yield put({ type: SET_LOADING, payload: true });
+    const { email, password } = action.payload;
     user = yield call(doSignInWithEmailAndPassword, email, password);
     yield put(setUser(user));
-
     yield put({ type: LOGIN_SUCCESS });
-
-    localStorage.setItem('user', JSON.stringify(user));
-
-    replace(HOME);
+    yield put(replace(HOME));
   } catch (error) {
-    yield put({ type: LOGIN_ERROR, error });
+    yield call(showMessage, { type: 'error', text: error.message });
   } finally {
-    if (yield cancelled()) {
-      yield put(replace(LOGIN));
-    }
+    yield put({ type: SET_LOADING, payload: false });
   }
   return user;
 }
 
 function* loginWatcher() {
-  while (true) {
-    const { email, password } = yield take(LOGIN_REQUESTING);
-    const task = yield fork(loginFlow, email, password);
-    const action = yield take([USER_UNSET, LOGIN_ERROR]);
-    if (action.type === USER_UNSET) {
-      yield cancel(task);
-      yield call(logout);
-    }
-  }
+  yield [
+    takeEvery(LOGIN_REQUESTING, loginFlow),
+    takeEvery(LOGOUT_REQUESTING, logoutFlow)
+  ];
 }
 
 export default loginWatcher;

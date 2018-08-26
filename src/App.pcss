@@ -36,3 +36,92 @@ body {
 	opacity: 0.01;
 	transition: opacity 300ms ease-in;
 }
+
+
+.popup {
+	position: relative;
+}
+
+.popup .popuptext {
+	visibility: hidden;
+	width: 70%;
+	min-width: 160px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	position: absolute;
+	bottom: 110%;
+	right: 50%;
+	transform: translateX(50%);
+	z-index: 100;
+}
+
+.popup .popuptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+.popup .show {
+	visibility: visible;
+	animation: fadeIn 1s
+}
+
+.input_error {
+	background-color: rgba(208, 2, 27, 0.3);
+}
+
+
+.mv-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	background-color: $backgroundOne;
+
+	&--centered {
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.mv-messages {
+	position: fixed;
+	top: 2rem;
+	right: 2rem;
+	margin: 0;
+	padding: 0;
+	width: 20%;
+	min-width: 150px;
+}
+.mv-message {
+	padding: 1rem;
+	border-radius: 5px;
+	color: $textColorLite;
+	background-color: $primary;
+
+	&--error {
+		background-color: $accent;
+	}
+	&--info {
+		background-color: $primary;
+	}
+}
+
+.mv-loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}

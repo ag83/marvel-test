@@ -1,43 +1,18 @@
 export const LOGIN_REQUESTING = 'LOGIN_REQUESTING';
+export const LOGOUT_REQUESTING = 'LOGOUT_REQUESTING';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 const initialState = {
-  requesting: false,
-  successful: false,
-  messages: [],
-  errors: [],
+  logged: false
 };
 
 const reducer = function loginReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUESTING:
-      return {
-        requesting: true,
-        successful: false,
-        messages: [{ body: 'Logging in...', time: new Date() }],
-        errors: [],
-      };
-
+    case LOGOUT_SUCCESS:
+      return { ...state, logged: false };
     case LOGIN_SUCCESS:
-      return {
-        errors: [],
-        messages: [],
-        requesting: false,
-        successful: true,
-      };
-
-    case LOGIN_ERROR:
-      return {
-        errors: state.errors.concat([{
-          body: action.error.toString(),
-          time: new Date(),
-        }]),
-        messages: [],
-        requesting: false,
-        successful: false,
-      };
-
+      return { ...state, logged: true };
     default:
       return state;
   }

@@ -7,8 +7,9 @@ const globalVariable = {
   backgroundOne: '#fafafa',
   backgroundTwo: '#fff',
   textColor: '#2c2c2c',
-  headerHeight: '107px',
-  footerHeight: '365px',
+  textColorLite: '#fff',
+  headerHeight: '100px',
+  footerHeight: '260px',
 };
 
 module.exports = globalVariable;
