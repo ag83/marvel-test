@@ -15,7 +15,7 @@ export const HOME = '/';
 export const HEROES = '/heroes';
 export const HERO = 'hero/:id';
 
-function PrivateRoute({ component: Component, ...rest }) {
+function LoggedRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
@@ -24,37 +24,25 @@ function PrivateRoute({ component: Component, ...rest }) {
   );
 }
 
+function LogoutRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props => (loginCheck() ? <Redirect to={HEROES} /> : <Component {...props} />)}
+    />
+  );
+}
+
 export default function router() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <Route
-          exact
-          path={HOME}
-          render={props =>
-              (loginCheck() ? (
-                <Redirect to={HEROES} {...props} />
-              ) : (
-                <Redirect to={LOGIN} {...props} />
-              ))
-            }
-        />
-        <Route
-          exact
-          path={LOGIN}
-          render={props =>
-            (loginCheck() ? (
-              <Redirect to={HEROES} {...props} />
-            ) : (
-              <LoginPage {...props} />
-            ))
-          }
-        />
-        <Route exact path={LOGIN} component={LoginPage} />
-        <Route exact path={REGISTER} component={RegisterPage} />
-        <PrivateRoute exact path={HEROES} component={HeroesPage} />
-        <PrivateRoute exact path={HERO} component={HeroPage} />
-        <Redirect from="/*" to="/" />
+        <LogoutRoute exact path={LOGIN} component={LoginPage} />
+        <LogoutRoute exact path={REGISTER} component={RegisterPage} />
+        <LoggedRoute exact path={HOME} component={HeroesPage} />
+        <LoggedRoute exact path={HEROES} component={HeroesPage} />
+        <LoggedRoute exact path={HERO} component={HeroPage} />
+        <Redirect from="/*" to={HOME} />
       </Switch>
     </ConnectedRouter>
   );

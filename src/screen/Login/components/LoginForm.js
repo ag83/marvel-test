@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import reduxForm from 'redux-form/es/reduxForm';
 import Field from 'redux-form/es/Field';
+import { Link } from 'react-router-dom';
 
 import inputWithValidation from '../../Common/components/inputWithValidation';
+import { REGISTER } from '../../../router';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -51,6 +53,7 @@ class LoginForm extends Component {
         <button type="submit" className="mv-login__form-submit" disabled={this.props.invalid || this.props.submitting || this.props.pristine} >
           Login
         </button>
+        <Link href={`/${REGISTER}`} to={REGISTER} className="mv-login__link">Registration page</Link>
       </form>
     );
   }

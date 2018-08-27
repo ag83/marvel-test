@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 
-import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './reducer';
+import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_RESTORE, LOGOUT_RESTORE } from './reducer';
 import { SET_LOADING } from '../Common/reducer';
 import showMessage from '../Common/sagas';
 import { doSignInWithEmailAndPassword, doSignOut } from '../../firebase/auth';
@@ -20,6 +20,19 @@ function* logoutFlow() {
   } finally {
     yield put({ type: SET_LOADING, payload: false });
   }
+}
+
+function* loggedUserFlow(action) {
+  const user = action.payload;
+  yield put(setUser(user));
+  yield put({ type: LOGIN_SUCCESS });
+  yield put(replace(HOME));
+}
+
+function* unloggedUserFlow() {
+  yield put(unsetUser());
+  yield put({ type: LOGOUT_SUCCESS });
+  yield put(replace(LOGIN));
 }
 
 function* loginFlow(action) {
@@ -42,7 +55,9 @@ function* loginFlow(action) {
 function* loginWatcher() {
   yield [
     takeEvery(LOGIN_REQUESTING, loginFlow),
-    takeEvery(LOGOUT_REQUESTING, logoutFlow)
+    takeEvery(LOGOUT_REQUESTING, logoutFlow),
+    takeEvery(LOGIN_RESTORE, loggedUserFlow),
+    takeEvery(LOGOUT_RESTORE, unloggedUserFlow)
   ];
 }
 
