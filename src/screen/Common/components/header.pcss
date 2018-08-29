@@ -1,0 +1,55 @@
+.mv-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: $backgroundTwo;
+
+  &__wrapper {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $headerHeight;
+  }
+
+  &__logo {
+    height: 4rem;
+    width: auto;
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &__avatar {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+        min-height: 100%;
+        width: 100%;
+        vertical-align: top;
+    }
+  }
+  &__user {
+    padding: 1rem;
+    color: $textColor;
+    font-size: 1.2rem;
+  }
+  &__logout {
+    border:none;
+    color: $primary;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

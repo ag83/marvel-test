@@ -9,7 +9,6 @@ const globalVariable = {
   textColor: '#2c2c2c',
   textColorLite: '#fff',
   headerHeight: '100px',
-  footerHeight: '260px',
 };
 
 module.exports = globalVariable;

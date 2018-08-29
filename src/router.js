@@ -13,7 +13,7 @@ export const LOGIN = '/login';
 export const REGISTER = '/register';
 export const HOME = '/';
 export const HEROES = '/heroes';
-export const HERO = 'hero/:id';
+export const HERO = '/hero';
 
 function LoggedRoute({ component: Component, ...rest }) {
   return (
@@ -41,7 +41,7 @@ export default function router() {
         <LogoutRoute exact path={REGISTER} component={RegisterPage} />
         <LoggedRoute exact path={HOME} component={HeroesPage} />
         <LoggedRoute exact path={HEROES} component={HeroesPage} />
-        <LoggedRoute exact path={HERO} component={HeroPage} />
+        <LoggedRoute exact path={`${HERO}:id`} component={HeroPage} />
         <Redirect from="/*" to={HOME} />
       </Switch>
     </ConnectedRouter>

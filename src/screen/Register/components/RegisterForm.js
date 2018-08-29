@@ -66,7 +66,7 @@ class RegisterForm extends Component {
         <button type="submit" className="mv-register__form-submit" disabled={this.props.invalid || this.props.submitting || this.props.pristine} >
           Register
         </button>
-        <Link href={`/${LOGIN}`} to={LOGIN} className="mv-register__link" >Login page</Link>
+        <Link href={LOGIN} to={LOGIN} className="mv-register__link" >Login page</Link>
       </form>
     );
   }

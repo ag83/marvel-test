@@ -1,7 +1,6 @@
-const GET_USERS_SAGA = 'GET_USERS_SAGA';
-const SET_USERS = 'SET_USERS';
-
-export {  //eslint-disable-line
-  GET_USERS_SAGA,
-  SET_USERS
+const constants = {
+  marvelApiKey: 'f62d8a81b3d0002951a5315e21028eb1',
+  marvelApi: 'http://gateway.marvel.com/v1/public/'
 };
+
+export default constants;

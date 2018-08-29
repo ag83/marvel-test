@@ -12,9 +12,9 @@ function* logoutFlow() {
   try {
     yield put({ type: SET_LOADING, payload: true });
     yield call(doSignOut);
-    yield put(unsetUser());
     yield put({ type: LOGOUT_SUCCESS });
     yield put(replace(LOGIN));
+    yield put(unsetUser());
   } catch (error) {
     yield call(showMessage, { type: 'error', text: error.message });
   } finally {
@@ -30,9 +30,9 @@ function* loggedUserFlow(action) {
 }
 
 function* unloggedUserFlow() {
-  yield put(unsetUser());
   yield put({ type: LOGOUT_SUCCESS });
   yield put(replace(LOGIN));
+  yield put(unsetUser());
 }
 
 function* loginFlow(action) {

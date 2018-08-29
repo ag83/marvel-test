@@ -2,7 +2,7 @@ export const USER_SET = 'USER_SET';
 export const USER_UNSET = 'USER_UNSET';
 
 const initialSate = {
-  user: null
+  user: undefined
 };
 
 const reducer = function userReducer(state = initialSate, action) {

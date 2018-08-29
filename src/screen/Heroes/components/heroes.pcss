@@ -1,0 +1,78 @@
+.mv-heroes {
+
+  &__container {
+    min-height: calc(100vh - $headerHeight - 6rem;);
+    margin-top: $headerHeight;
+    background-color: $backgroundOne;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__pagination-container {
+    display: flex;
+    align-items: center;
+    height: 6rem;
+  }
+}
+
+
+.mv-hero-card {
+  @media only screen  and (min-width : 1600px) {
+    width: calc(25% - 30px);
+  }
+  @media only screen  and (min-width : 1366px) and (max-width: 1599px){
+    width: calc(33.33% - 30px);
+  }
+  width: calc(50% - 30px);
+  display: flex;
+  height: 526px;
+  background-color: $backgroundTwo;
+  margin: 15px;
+  &:hover, &:active {
+    box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.12);
+  }
+  a {
+    text-decoration: none;
+    transition: all ease-out 0.2s;
+    &:hover, &:active {
+      .mv-hero-card__hero-name {
+        color: $primary;
+      }
+    }
+  }
+
+  &__avatar {
+    height: 65%;
+    overflow: hidden;
+    background-color: $backgroundOne;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+}
+
+  &__hero-info {
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+  }
+  &__hero-name {
+    color: $textColor;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem 0;
+  }
+  &__hero-description {
+    color: $darkGray;
+    min-height: 4rem;
+    max-height: 4.5rem;
+    overflow: hidden;
+  }
+}
