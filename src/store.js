@@ -8,7 +8,6 @@ import rootReducer from './reducers';
 import IndexSaga from './sagas';
 
 export const history = createHistory();
-
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
