@@ -11,12 +11,10 @@ const reducer = function userReducer(state = initialSate, action) {
       return {
         user: action.user,
       };
-
     case USER_UNSET:
       return {
         user: null
       };
-
     default:
       return state;
   }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { loginRequest, loginSocial } from './actions';
 import LoginForm from './components/LoginForm';
 
-import './styles.pcss';
+import './login.pcss';
 
 class LoginPage extends Component {
   render() {
@@ -20,7 +20,7 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  login: state.login
+  //logged: state.login.logged
 });
 
 const mapDispatchToProps = dispatch => ({

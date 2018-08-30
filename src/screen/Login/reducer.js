@@ -13,9 +13,9 @@ const initialState = {
 const reducer = function loginReducer(state = initialState, action) {
   switch (action.type) {
     case LOGOUT_SUCCESS:
-      return { ...state, logged: false };
+      return { logged: false };
     case LOGIN_SUCCESS:
-      return { ...state, logged: true };
+      return { logged: true };
     default:
       return state;
   }

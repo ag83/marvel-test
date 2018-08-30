@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import registerRequest from './actions';
 import RegisterForm from './components/RegisterForm';
 
-import './styles.pcss';
+import './register.pcss';
 
 class RegisterPage extends Component {
   render() {
@@ -17,7 +17,7 @@ class RegisterPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  register: state.registerReducer
+  //
 });
 
 const mapDispatchToProps = dispatch => ({

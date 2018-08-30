@@ -5,6 +5,7 @@ import { getHero, clearHero } from './actions';
 import Loading from '../Common/components/Loading';
 import Header from '../Common/components/Header';
 import { logoutRequest } from '../Login/actions';
+import { currentHeroSelector } from './selectors';
 
 import './hero.pcss';
 
@@ -22,6 +23,7 @@ class HeroPage extends Component {
   }
 
   render() {
+    console.log(this.props.hero);
     return (
       <div className="mv-hero__container" >
         <Header {...this.props.user} logoutUser={this.props.logout} />
@@ -74,7 +76,7 @@ class HeroPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  hero: state.hero.hero,
+  hero: currentHeroSelector(state),
   user: state.user
 });
 

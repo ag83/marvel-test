@@ -50,9 +50,12 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  restore: user => dispatch(loginRestore(user)),
-  forceLogout: () => dispatch(logoutRestore()),
-  setUser: user => dispatch(setUser(user))
+  restore: user =>
+    dispatch(loginRestore(user)),
+  forceLogout: () =>
+    dispatch(logoutRestore()),
+  setUser: user =>
+    dispatch(setUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

@@ -6,6 +6,8 @@ import Header from '../Common/components/Header';
 import Heroes from './components/Heroes';
 import { logoutRequest } from '../Login/actions';
 
+import './heroes.pcss';
+
 class HeroesPage extends Component {
   render() {
     return (

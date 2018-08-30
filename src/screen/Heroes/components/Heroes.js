@@ -3,8 +3,6 @@ import ReactPaginate from 'react-paginate';
 
 import HeroCard from './HeroCard';
 
-import './heroes.pcss';
-
 class Heroes extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const pageCount = Math.floor(nextProps.totalHeroes / 10);
