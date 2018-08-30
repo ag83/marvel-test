@@ -1,14 +1,15 @@
-import { HERO_REQUEST, HERO_SUCCESS } from './reducer';
+import { HERO_REQUEST, CLEAR_HERO } from './reducer';
 
-export function getHero() {
+export function getHero(id) {
   return {
     type: HERO_REQUEST,
+    payload: id
   };
 }
 
-export function setHero() {
+export function clearHero() {
   return {
-    type: HERO_SUCCESS,
+    type: CLEAR_HERO
   };
 }
 

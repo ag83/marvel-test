@@ -8,7 +8,9 @@ export async function getHeroes(params) {
   return data.data;
 }
 
-export async function getHero() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users');
-  return response.json();
+export async function getHeroById(id) {
+  const response = await fetch(`${constants.marvelApi}characters/${id + addGetParameters({ apikey: constants.marvelApiKey })}`);
+  const data = await response.json();
+  const hero = data.data.results.find(item => item.id == id);
+  return hero;
 }

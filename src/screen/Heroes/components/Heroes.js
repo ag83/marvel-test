@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 
-import Hero from './Hero';
+import HeroCard from './HeroCard';
 
 import './heroes.pcss';
 
 class Heroes extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const pageCount = Math.floor(nextProps.totalHeroes / 10);
+    const currentPage = Math.floor(nextProps.params.offset / 10);
     if (prevState.pageCount !== pageCount) {
-      return { pageCount };
+      return { pageCount, currentPage };
     }
     return null;
   }
@@ -17,7 +18,8 @@ class Heroes extends Component {
     super(props);
 
     this.state = {
-      pageCount: 0
+      pageCount: 0,
+      currentPage: 0
     };
 
     this.navigate = this.navigate.bind(this);
@@ -30,14 +32,12 @@ class Heroes extends Component {
     }
   }
   componentDidUpdate = (prevProps) => {
-    console.log(prevProps.props, this.props);
     if (prevProps && prevProps.params.offset !== this.props.params.offset) {
       this.heroesContainer.scrollIntoView();
     }
   }
 
   setHeroesContainerRef(ref) {
-    console.log(ref);
     this.heroesContainer = ref;
   }
 
@@ -52,13 +52,14 @@ class Heroes extends Component {
     return (
       <section>
         <div className="mv-heroes__container" ref={this.setHeroesContainerRef}>
-          {this.props.heroes.map(hero => (<Hero key={hero.id} {...hero} />))}
+          {this.props.heroes.map(hero => (<HeroCard key={hero.id} {...hero} />))}
         </div>
         <div className="mv-heroes__pagination-container">
           <ReactPaginate
             previousLabel="<"
             nextLabel=">"
             breakClassName="break-me"
+            forcePage={this.state.currentPage}
             pageCount={this.state.pageCount}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}

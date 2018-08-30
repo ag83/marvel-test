@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { HERO } from '../../../router';
 
-class Hero extends Component {
+class HeroCard extends Component {
   render() {
     return (
       <article className="mv-hero-card">
@@ -28,4 +28,4 @@ class Hero extends Component {
   }
 }
 
-export default Hero;
+export default HeroCard;

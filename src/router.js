@@ -41,7 +41,7 @@ export default function router() {
         <LogoutRoute exact path={REGISTER} component={RegisterPage} />
         <LoggedRoute exact path={HOME} component={HeroesPage} />
         <LoggedRoute exact path={HEROES} component={HeroesPage} />
-        <LoggedRoute exact path={`${HERO}:id`} component={HeroPage} />
+        <LoggedRoute path={`${HERO}/:id`} component={HeroPage} />
         <Redirect from="/*" to={HOME} />
       </Switch>
     </ConnectedRouter>
