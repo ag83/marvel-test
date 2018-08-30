@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import heroesRequest from './actions';
@@ -32,3 +33,18 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroesPage);
+
+HeroesPage.propTypes = {
+  getHeroes: PropTypes.func,
+  logout: PropTypes.func,
+  user: PropTypes.object,
+  heroes: PropTypes.shape({
+    heroes: PropTypes.array,
+    totalHeroes: PropTypes.number,
+    params: PropTypes.shape({
+      offset: PropTypes.number,
+      limit: PropTypes.number
+    })
+  })
+};
+

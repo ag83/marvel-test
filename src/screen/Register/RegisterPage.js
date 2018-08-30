@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import registerRequest from './actions';
@@ -25,3 +26,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+
+RegisterPage.propTypes = {
+  register: PropTypes.func
+};
+

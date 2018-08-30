@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loginRequest, loginSocial } from './actions';
@@ -31,3 +32,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+
+
+LoginPage.propTypes = {
+  loginUser: PropTypes.func,
+  loginSocial: PropTypes.func
+};
+

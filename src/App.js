@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import router from './router';
@@ -59,3 +60,16 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+
+AppContainer.propTypes = {
+  restore: PropTypes.func,
+  forceLogout: PropTypes.func,
+  setUser: PropTypes.func,
+  loading: PropTypes.bool,
+  logged: PropTypes.bool,
+  user: PropTypes.object,
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string,
+    type: PropTypes.string
+  }))
+};
