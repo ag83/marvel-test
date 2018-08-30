@@ -1,13 +1,28 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
+import loadable from 'react-loadable';
 
 import { history } from './store';
+import Loading from './screen/Common/components/Loading';
 import { loginCheck } from './firebase/auth';
-import HeroesPage from './screen/Heroes/HeroesPage';
-import HeroPage from './screen/Hero/HeroPage';
-import LoginPage from './screen/Login/LoginPage';
-import RegisterPage from './screen/Register/RegisterPage';
+
+const AsyncHeroesPage = loadable({
+  loader: () => import('./screen/Heroes/HeroesPage'),
+  loading: ({ isLoading }) => (<Loading loading={isLoading} />)
+});
+const AsyncHeroPage = loadable({
+  loader: () => import('./screen/Hero/HeroPage'),
+  loading: ({ isLoading }) => (<Loading loading={isLoading} />)
+});
+const AsyncLoginPage = loadable({
+  loader: () => import('./screen/Login/LoginPage'),
+  loading: ({ isLoading }) => (<Loading loading={isLoading} />)
+});
+const AsyncRegisterPage = loadable({
+  loader: () => import('./screen/Register/RegisterPage'),
+  loading: ({ isLoading }) => (<Loading loading={isLoading} />)
+});
 
 export const LOGIN = '/login';
 export const REGISTER = '/register';
@@ -37,11 +52,11 @@ export default function router() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <LogoutRoute exact path={LOGIN} component={LoginPage} />
-        <LogoutRoute exact path={REGISTER} component={RegisterPage} />
-        <LoggedRoute exact path={HOME} component={HeroesPage} />
-        <LoggedRoute exact path={HEROES} component={HeroesPage} />
-        <LoggedRoute path={`${HERO}/:id`} component={HeroPage} />
+        <LogoutRoute exact path={LOGIN} component={AsyncLoginPage} />
+        <LogoutRoute exact path={REGISTER} component={AsyncRegisterPage} />
+        <LoggedRoute exact path={HOME} component={AsyncHeroesPage} />
+        <LoggedRoute exact path={HEROES} component={AsyncHeroesPage} />
+        <LoggedRoute path={`${HERO}/:id`} component={AsyncHeroPage} />
         <Redirect from="/*" to={HOME} />
       </Switch>
     </ConnectedRouter>
