@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import router from './router';
 import Loading from './screen/Common/components/Loading';
 import Alert from './screen/Common/components/Alert';
-import auth from './firebase/firebase';
+import { auth } from './firebase/firebase';
 import { loginRestore, logoutRestore } from './screen/Login/actions';
 import { setUser } from './screen/User/actions';
 

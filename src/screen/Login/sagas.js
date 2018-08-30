@@ -1,10 +1,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 
-import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_RESTORE, LOGOUT_RESTORE } from './reducer';
+import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_RESTORE, LOGOUT_RESTORE, LOGIN_SOCIAL } from './reducer';
 import { SET_LOADING } from '../Common/reducer';
 import showMessage from '../Common/sagas';
-import { doSignInWithEmailAndPassword, doSignOut } from '../../firebase/auth';
+import { doSignInWithEmailAndPassword, doSignOut, facebookLogin, googleLogin } from '../../firebase/auth';
 import { setUser, unsetUser } from '../User/actions';
 import { LOGIN, HOME } from '../../router';
 
@@ -52,9 +52,35 @@ function* loginFlow(action) {
   return user;
 }
 
+function* loginSocialFlow(action) {
+  let user;
+  try {
+    yield put({ type: SET_LOADING, payload: true });
+    const type = action.payload;
+    switch (type) {
+      case 'facebook':
+        user = yield call(facebookLogin);
+        break;
+      case 'google':
+        user = yield call(googleLogin);
+        break;
+      default:
+        return;
+    }
+    yield put(setUser(user));
+    yield put({ type: LOGIN_SUCCESS });
+    yield put(replace(HOME));
+  } catch (error) {
+    yield call(showMessage, { type: 'error', text: error.message });
+  } finally {
+    yield put({ type: SET_LOADING, payload: false });
+  }
+}
+
 function* loginWatcher() {
   yield [
     takeEvery(LOGIN_REQUESTING, loginFlow),
+    takeEvery(LOGIN_SOCIAL, loginSocialFlow),
     takeEvery(LOGOUT_REQUESTING, logoutFlow),
     takeEvery(LOGIN_RESTORE, loggedUserFlow),
     takeEvery(LOGOUT_RESTORE, unloggedUserFlow)

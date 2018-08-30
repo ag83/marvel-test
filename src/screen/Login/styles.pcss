@@ -69,6 +69,30 @@
     }
   }
 
+  &__social-btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    margin-top: 1.6rem;
+    &:not(:last-child) {
+        margin-right: 1.2rem;
+    }
+    &:focus{
+        outline: none;
+        border: 2px solid $gray;
+    }
+
+    &.mv-login__btn-facebook {
+        background-color: #3a5695;
+    }
+
+    &.mv-login__btn-google {
+        background-color:#dc4e41;
+    }
+  }
+
   &__link {
     margin-top: 2rem;
     color: $primary;

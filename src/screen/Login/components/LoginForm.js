@@ -6,11 +6,16 @@ import { Link } from 'react-router-dom';
 import inputWithValidation from '../../Common/components/inputWithValidation';
 import { REGISTER } from '../../../router';
 
+import facebook from '../../../img/facebook.svg';
+import google from '../../../img/google.svg';
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.loginUser = this.loginUser.bind(this);
+    this.loginFacebook = this.loginFacebook.bind(this);
+    this.loginGoogle = this.loginGoogle.bind(this);
   }
 
   loginUser(values) {
@@ -18,6 +23,16 @@ class LoginForm extends Component {
       email: values.Login,
       password: values.Password
     });
+  }
+
+  loginFacebook(evt) {
+    evt.preventDefault();
+    this.props.loginSocial('facebook');
+  }
+
+  loginGoogle(evt) {
+    evt.preventDefault();
+    this.props.loginSocial('google');
   }
 
   render() {
@@ -53,6 +68,22 @@ class LoginForm extends Component {
         <button type="submit" className="mv-login__form-submit" disabled={this.props.invalid || this.props.submitting || this.props.pristine} >
           Login
         </button>
+        <div className="mv-login__social" >
+          <button
+            className="mv-login__social-btn mv-login__btn-facebook"
+            onClick={this.loginFacebook}
+            type="button"
+          >
+            <img alt="facebook login" src={facebook} />
+          </button>
+          <button
+            className="mv-login__social-btn mv-login__btn-google"
+            onClick={this.loginGoogle}
+            type="button"
+          >
+            <img alt="google login" src={google} />
+          </button>
+        </div>
         <Link href={REGISTER} to={REGISTER} className="mv-login__link">Registration page</Link>
       </form>
     );

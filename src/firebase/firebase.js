@@ -14,7 +14,10 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-const auth = firebase.auth();
+export const auth = firebase.auth();
+export const facebook = new firebase.auth.FacebookAuthProvider();
+export const google = new firebase.auth.GoogleAuthProvider();
+
 auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
 export default auth;

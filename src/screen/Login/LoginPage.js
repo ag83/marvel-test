@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { loginRequest } from './actions';
+import { loginRequest, loginSocial } from './actions';
 import LoginForm from './components/LoginForm';
 
 import './styles.pcss';
@@ -10,7 +10,10 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="mv-container mv-container--centered">
-        <LoginForm loginUser={this.props.loginUser} />
+        <LoginForm
+          loginSocial={this.props.loginSocial}
+          loginUser={this.props.loginUser}
+        />
       </div>
     );
   }
@@ -21,7 +24,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: user => dispatch(loginRequest(user))
+  loginUser: user =>
+    dispatch(loginRequest(user)),
+  loginSocial: type =>
+    dispatch(loginSocial(type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

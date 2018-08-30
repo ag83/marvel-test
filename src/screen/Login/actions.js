@@ -1,4 +1,4 @@
-import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_RESTORE, LOGOUT_RESTORE } from './reducer';
+import { LOGIN_REQUESTING, LOGOUT_REQUESTING, LOGIN_RESTORE, LOGOUT_RESTORE, LOGIN_SOCIAL } from './reducer';
 
 export function loginRequest({ email, password }) {
   return {
@@ -23,5 +23,12 @@ export function loginRestore(user) {
 export function logoutRestore() {
   return {
     type: LOGOUT_RESTORE
+  };
+}
+
+export function loginSocial(type) {
+  return {
+    type: LOGIN_SOCIAL,
+    payload: type
   };
 }
