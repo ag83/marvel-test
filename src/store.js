@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';
 import IndexSaga from './sagas';
 
-export const history = createHistory({ basename: process.env.PUBLIC_URL });
+export const history = createHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
